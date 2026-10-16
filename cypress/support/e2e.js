@@ -1,1 +1,1 @@
-// Shared test configuration belongs here as the suite grows.
+// A configuração de teste compartilhada deve ficar aqui à medida que a suíte cresce.

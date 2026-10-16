@@ -76,7 +76,7 @@ Then("permaneço na tela de login", () => {
 
 Then("o formulário impede o envio dos dados fora do formato aceito", () => {
   cy.contains("button:visible", /acessar|entrar|login/i).should("be.visible");
-  cy.contains(/inválid|incorret|erro|obrigatóri|preench|formato|dígito|ops!|verifique/i).should("be.visible");
+  cy.contains(/inválid|incorret|erro|obrigatório|preench|formato|dígito|ops!|verifique/i).should("be.visible");
 });
 
 When("cadastro um aluno com dados válidos", () => {

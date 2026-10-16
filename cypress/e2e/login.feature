@@ -1,38 +1,38 @@
-# language: pt
-Funcionalidade: Autenticação
+# language: en
+Feature: Autenticação
   Como usuário do sistema
   Quero entrar com minhas credenciais
   Para acessar a gestão de alunos
 
-  Cenário: Login bem sucedido
-    Dado que estou na tela de login da aplicação
-    Quando informo a matrícula "2620101"
-    E informo a senha "12345678"
-    E clico no botão de acessar
-    Então sou redirecionado para a tela de listagem de alunos
+  Scenario: Login bem sucedido
+    Given que estou na tela de login da aplicação
+    When informo a matrícula "2620101"
+    And informo a senha "12345678"
+    And clico no botão de acessar
+    Then sou redirecionado para a tela de listagem de alunos
 
-  Esquema do Cenário: Login mal sucedido
-    Dado que estou na tela de login da aplicação
-    Quando informo a matrícula "<matricula>"
-    E informo a senha "<senha>"
-    E clico no botão de acessar
-    Então o sistema exibe uma mensagem de erro correspondente
-    E permaneço na tela de login
+  Scenario Outline: Login mal sucedido
+    Given que estou na tela de login da aplicação
+    When informo a matrícula "<matricula>"
+    And informo a senha "<senha>"
+    And clico no botão de acessar
+    Then o sistema exibe uma mensagem de erro correspondente
+    And permaneço na tela de login
 
-    Exemplos:
+    Examples:
       | matricula | senha    |
       | 1111111   | 12345678 |
       | 2620101   | 87654321 |
       |           |          |
 
-  Esquema do Cenário: Rejeição de credenciais fora das regras de formato
-    Dado que estou na tela de login da aplicação
-    Quando informo a matrícula "<matricula>"
-    E informo a senha "<senha>"
-    E clico no botão de acessar
-    Então o formulário impede o envio dos dados fora do formato aceito
+  Scenario Outline: Rejeição de credenciais fora das regras de formato
+    Given que estou na tela de login da aplicação
+    When informo a matrícula "<matricula>"
+    And informo a senha "<senha>"
+    And clico no botão de acessar
+    Then o formulário impede o envio dos dados fora do formato aceito
 
-    Exemplos:
+    Examples:
       | matricula | senha    |
       | 123456    | 12345678 |
       | 1234567890| 12345678 |

@@ -1,59 +1,59 @@
-# language: pt
-Funcionalidade: Gestão de alunos
+# language: en
+Feature: Gestão de alunos
   Como usuário autenticado
   Quero consultar e manter os alunos
   Para manter os dados cadastrais atualizados
 
-  Contexto:
-    Dado que sou usuário autenticado na tela de alunos
+  Background:
+    Given que sou usuário autenticado na tela de alunos
 
-  Cenário: Cadastro de aluno bem sucedido
-    Quando cadastro um aluno com dados válidos
-    Então o sistema cadastra o aluno e exibe uma mensagem de sucesso
-    E o novo aluno passa a ser exibido na lista
+  Scenario: Cadastro de aluno bem sucedido
+    When cadastro um aluno com dados válidos
+    Then o sistema cadastra o aluno e exibe uma mensagem de sucesso
+    And o novo aluno passa a ser exibido na lista
 
-  Cenário: Busca de alunos pelo nome
-    Quando busco um aluno existente pelo nome
-    Então a lista exibe apenas registros correspondentes ao nome
+  Scenario: Busca de alunos pelo nome
+    When busco um aluno existente pelo nome
+    Then a lista exibe apenas registros correspondentes ao nome
 
-  Cenário: Busca de alunos pela matrícula
-    Quando busco um aluno existente pela matrícula
-    Então a lista exibe apenas registros correspondentes à matrícula
+  Scenario: Busca de alunos pela matrícula
+    When busco um aluno existente pela matrícula
+    Then a lista exibe apenas registros correspondentes à matrícula
 
-  Cenário: Edição de um aluno existente
-    Quando edito um aluno existente com dados válidos
-    Então o sistema atualiza as informações e exibe uma mensagem de sucesso
-    E a lista reflete os dados atualizados
+  Scenario: Edição de um aluno existente
+    When edito um aluno existente com dados válidos
+    Then o sistema atualiza as informações e exibe uma mensagem de sucesso
+    And a lista reflete os dados atualizados
 
-  Cenário: Exclusão de um aluno bem sucedida
-    Quando excluo um aluno existente e confirmo a operação
-    Então o sistema remove o aluno e exibe uma mensagem de sucesso
-    E o aluno não é mais exibido na lista de registros
+  Scenario: Exclusão de um aluno bem sucedida
+    When excluo um aluno existente e confirmo a operação
+    Then o sistema remove o aluno e exibe uma mensagem de sucesso
+    And o aluno não é mais exibido na lista de registros
 
-  Cenário: Logout do sistema
-    Quando clico no botão de sair
-    Então sou redirecionado para a tela de acesso à aplicação
+  Scenario: Logout do sistema
+    When clico no botão de sair
+    Then sou redirecionado para a tela de acesso à aplicação
 
-  Cenário: Paginação da listagem
-    Quando navego para a próxima página de alunos
-    Então a lista exibe a página seguinte
+  Scenario: Paginação da listagem
+    When navego para a próxima página de alunos
+    Then a lista exibe a página seguinte
 
-  Cenário: Validação de campos obrigatórios no cadastro
-    Quando tento salvar um aluno sem preencher os campos obrigatórios
-    Então o formulário informa que os dados obrigatórios devem ser preenchidos
+  Scenario: Validação de campos obrigatórios no cadastro
+    When tento salvar um aluno sem preencher os campos obrigatórios
+    Then o formulário informa que os dados obrigatórios devem ser preenchidos
 
-  Esquema do Cenário: Validação do formato da matrícula do aluno
-    Quando tento cadastrar um aluno com a matrícula "<matricula>"
-    Então o formulário informa que a matrícula deve conter de sete a nove dígitos
+  Scenario Outline: Validação do formato da matrícula do aluno
+    When tento cadastrar um aluno com a matrícula "<matricula>"
+    Then o formulário informa que a matrícula deve conter de sete a nove dígitos
 
-    Exemplos:
+    Examples:
       | matricula  |
       | 123456     |
       | abc12345   |
 
-  Cenário: Limite de nove dígitos na matrícula
-    Quando digito uma matrícula com dez dígitos no formulário
-    Então o campo de matrícula limita a entrada a nove dígitos
+  Scenario: Limite de nove dígitos na matrícula
+    When digito uma matrícula com dez dígitos no formulário
+    Then o campo de matrícula limita a entrada a nove dígitos
 
-  Cenário: Exibição dos dados principais dos alunos
-    Então a listagem apresenta matrícula, nome, data de nascimento e gênero
+  Scenario: Exibição dos dados principais dos alunos
+    Then a listagem apresenta matrícula, nome, data de nascimento e gênero
