@@ -59,10 +59,34 @@ $env:ELECTRON_RUN_AS_NODE = $null
 npm.cmd run cy:run
 ```
 
-## Organização e decisões
+## Executar com Docker
 
-A configuração do Cypress está em `cypress.config.js`, e os cenários seguem a estrutura de diretórios do Cypress. Os registros criados durante a execução usam uma matrícula derivada do horário para reduzir colisões com dados existentes no ambiente remoto.
+Com Docker instalado e em execução, construa a imagem na raiz do repositório:
 
-A aplicação é externa ao repositório e não há uma API local ou código-fonte disponível para preparar os dados. Por isso, os testes de listagem e CRUD dependem da disponibilidade do ambiente e dos dados encontrados nele. O acesso à rede também pode depender das configurações do ambiente em que a suíte for executada.
+```bash
+docker build -t desafio-qa .
+```
 
-A regra do desafio exige uma senha numérica com exatamente oito caracteres. A suíte inclui a verificação do limite de formato com nove dígitos; no ambiente observado, a aplicação aceita esse valor, em desacordo com a especificação. Esse caso fica documentado como uma divergência entre o comportamento atual da aplicação e o requisito.
+Execute a suíte dentro do container:
+
+```bash
+docker run --rm desafio-qa
+```
+
+O resultado dos testes aparece no terminal. Para manter as capturas de tela dos testes que falharem no computador, monte a pasta de screenshots como volume.
+
+No PowerShell:
+
+```powershell
+docker run --rm -v "${PWD}/cypress/screenshots:/app/cypress/screenshots" desafio-qa
+```
+
+No macOS ou Linux:
+
+```bash
+docker run --rm -v "$(pwd)/cypress/screenshots:/app/cypress/screenshots" desafio-qa
+```
+
+O container precisa de acesso à internet para instalar as dependências durante o build e acessar a aplicação durante os testes. A imagem é baseada na imagem oficial `cypress/base` com Node.js 24; o Cypress e os demais pacotes são instalados conforme o `package-lock.json`.
+
+

@@ -40,3 +40,16 @@ Feature: Autenticação
       | 2620101   | 1234567  |
       | 2620101   | 123456789|
       | 2620101   | senha123 |
+
+  Scenario Outline: Validar visualmente campos obrigatórios no login
+    Given que estou na tela de login da aplicação
+    When informo a matrícula "<matricula>"
+    And informo a senha "<senha>"
+    And clico no botão de acessar
+    Then o sistema exibe uma mensagem de erro correspondente
+    And permaneço na tela de login
+
+    Examples:
+      | matricula | senha    |
+      |           | 12345678 |
+      | 2620101   |          |
